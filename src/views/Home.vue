@@ -1,24 +1,44 @@
 <template>
   <div>
-    <b-card title="Kick start your project 🚀">
-      <b-card-text>All the best for your new project.</b-card-text>
-      <b-card-text>Please make sure to read our <b-link
-        href="https://pixinvent.com/demo/vuexy-vuejs-admin-dashboard-template/documentation/"
-        target="_blank"
-      >
-        Template Documentation
-      </b-link> to understand where to go from here and how to use our template.</b-card-text>
-    </b-card>
-
-    <b-card title="Want to integrate JWT? 🔒">
-      <b-card-text>We carefully crafted JWT flow so you can implement JWT with ease and with minimum efforts.</b-card-text>
-      <b-card-text>Please read our  JWT Documentation to get more out of JWT authentication.</b-card-text>
-    </b-card>
+    <section>
+      <b-card title="Liste des événements">
+        <b-card-text class="d-flex justify-content-end">
+          <b-link to="/event/create" class="btn btn-dark mb-2">Ajouter événement</b-link>
+        </b-card-text>
+        <b-card-text>
+          <table class="table">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description</th>
+              <th scope="col">Location</th>
+              <th scope="col">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="event in events" :key="event.id">
+              <th scope="row">{{ event.id }}</th>
+              <td>{{ event.name }}</td>
+              <td>{{ event.description }}</td>
+              <td>{{ event.location }}</td>
+              <td>
+                <b-link :to="{ name: 'event', params: { id: event.id } }" class="btn">View</b-link>
+                <b-link :to="{ name: 'edit', params: { id: event.id } }" class="btn text-warning">Edit</b-link>
+                <b-link :to="{ name: 'delete', params: { id: event.id } }" class="btn text-danger">Delete</b-link>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </b-card-text>
+      </b-card>
+    </section>
   </div>
 </template>
 
 <script>
 import { BCard, BCardText, BLink } from 'bootstrap-vue'
+import { getEvents } from '@/services/eventService'
 
 export default {
   components: {
@@ -26,6 +46,23 @@ export default {
     BCardText,
     BLink,
   },
+  data() {
+    return {
+      events: [],
+    }
+  },
+  created() {
+    this.getEvents()
+  },
+  methods: {
+    getEvents() {
+      // eslint-disable-next-line import/no-named-as-default-member
+      getEvents().then(response => {
+        this.events = response.data.events
+      })
+    },
+  },
+
 }
 </script>
 
