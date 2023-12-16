@@ -20,6 +20,49 @@ const router = new VueRouter({
           {
             text: 'Home',
             active: true,
+          }],
+      },
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: () => import('@/views/Dashboard.vue'),
+      meta: {
+        pageTitle: 'Dashboard',
+        breadcrumb: [
+          {
+            text: 'Dashboard',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/event/create',
+      name: 'event-create',
+      // eslint-disable-next-line import/no-unresolved
+      component: () => import('@/views/event/CreateEvent.vue'),
+      meta: {
+        pageTitle: 'Create Event',
+        breadcrumb: [
+          {
+            text: 'Create Event',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/event/:id',
+      name: 'event-detail',
+      // eslint-disable-next-line import/no-unresolved
+      component: () => import('@/views/event/DetailsEvent.vue'),
+      meta: {
+        pageTitle: 'Event Detail',
+        breadcrumb: [
+          {
+            text: 'Event Detail',
+            active: true,
           },
         ],
       },
