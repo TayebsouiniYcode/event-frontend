@@ -15,12 +15,57 @@ const router = new VueRouter({
       name: 'home',
       component: () => import('@/views/Home.vue'),
       meta: {
+        layout: 'full',
         pageTitle: 'Home',
         breadcrumb: [
           {
             text: 'Home',
             active: true,
           }],
+      },
+    },
+    {
+      path: '/event/detail/:id',
+      name: 'eventDetails',
+      component: () => import('@/views/client/DetailsEventClient.vue'),
+      meta: {
+        layout: 'full',
+        pageTitle: 'Event Details',
+        breadcrumb: [
+          {
+            text: 'Event Details',
+            active: true,
+          }],
+      },
+    },
+    {
+      path: '/panier',
+      name: 'panier',
+      component: () => import('@/views/event/Panier.vue'),
+      meta: {
+        layout: 'full',
+        pageTitle: 'Panier',
+        breadcrumb: [
+          {
+            text: 'Panier',
+            active: true,
+          },
+        ],
+      },
+    },
+    {
+      path: '/checkout',
+      name: 'checkout',
+      component: () => import('@/views/client/Checkout.vue'),
+      meta: {
+        layout: 'full',
+        pageTitle: 'Checkout',
+        breadcrumb: [
+          {
+            text: 'Checkout',
+            active: true,
+          },
+        ],
       },
     },
     {
@@ -62,20 +107,6 @@ const router = new VueRouter({
         breadcrumb: [
           {
             text: 'Event Detail',
-            active: true,
-          },
-        ],
-      },
-    },
-    {
-      path: '/second-page',
-      name: 'second-page',
-      component: () => import('@/views/SecondPage.vue'),
-      meta: {
-        pageTitle: 'Second Page',
-        breadcrumb: [
-          {
-            text: 'Second Page',
             active: true,
           },
         ],

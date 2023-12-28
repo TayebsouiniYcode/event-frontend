@@ -1,103 +1,107 @@
 <template>
-  <div class="navbar-container d-flex content align-items-center">
+  <div>
+    <div class="navbar-container d-flex align-items-center bg-dark text-light"> <!-- content -->
 
-    <!-- Nav Menu Toggler -->
-    <ul class="nav navbar-nav d-xl-none">
-      <li class="nav-item">
+      <!-- Nav Menu Toggler -->
+      <ul class="nav navbar-nav d-xl-none">
+        <li class="nav-item">
+          <b-link
+              class="nav-link"
+              @click="toggleVerticalMenuActive"
+          >
+            <feather-icon
+                icon="MenuIcon"
+                size="21"
+            />
+          </b-link>
+        </li>
+      </ul>
+
+      <!-- Left Col -->
+      <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
         <b-link
-          class="nav-link"
-          @click="toggleVerticalMenuActive"
+            class="btn btn-icon navbar-menu-bookmark d-none d-lg-block"
+            v-b-tooltip.hover
+            title="Bookmark page"
         >
-          <feather-icon
-            icon="MenuIcon"
-            size="21"
-          />
+          <a href="/"><h3 class="text-light">YouEvent</h3></a>
         </b-link>
-      </li>
-    </ul>
+      </div>
 
-    <!-- Left Col -->
-    <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
-      <dark-Toggler class="d-none d-lg-block" />
+      <b-navbar-nav class="nav align-items-center ml-auto">
+        <b-nav-item-dropdown
+            right
+            toggle-class="d-flex align-items-center dropdown-user-link"
+            class="dropdown-user"
+        >
+          <template #button-content>
+            <!--          <diV>-->
+            <!--            <dark-Toggler class="d-none d-lg-block" />-->
+            <!--          </diV>-->
+            <div class="d-sm-flex d-none user-nav">
+              <p class="user-name font-weight-bolder mb-0">
+                Tayeb SOUINI
+              </p>
+            </div>
+            <b-avatar
+                size="40"
+                variant="light-primary"
+                badge
+                :src="require('@/assets/images/avatars/13-small.png')"
+                class="badge-minimal"
+                badge-variant="success"
+            />
+          </template>
+
+          <b-dropdown-item link-class="d-flex align-items-center">
+            <feather-icon
+                size="16"
+                icon="UserIcon"
+                class="mr-50"
+            />
+            <router-link to="dashboard"><span>Dashboard</span></router-link>
+          </b-dropdown-item>
+
+          <b-dropdown-item link-class="d-flex align-items-center">
+            <feather-icon
+                size="16"
+                icon="UserIcon"
+                class="mr-50"
+            />
+            <router-link to="/panier"><span>Panier</span></router-link>
+          </b-dropdown-item>
+          <b-dropdown-divider />
+
+          <b-dropdown-item link-class="d-flex align-items-center">
+            <feather-icon
+                size="16"
+                icon="LogOutIcon"
+                class="mr-50"
+            />
+            <span>Logout</span>
+          </b-dropdown-item>
+        </b-nav-item-dropdown>
+
+      </b-navbar-nav>
     </div>
-
-    <b-navbar-nav class="nav align-items-center ml-auto">
-      <b-nav-item-dropdown
-        right
-        toggle-class="d-flex align-items-center dropdown-user-link"
-        class="dropdown-user"
-      >
-        <template #button-content>
-          <div class="d-sm-flex d-none user-nav">
-            <p class="user-name font-weight-bolder mb-0">
-              John Doe
-            </p>
-            <span class="user-status">Admin</span>
-          </div>
-          <b-avatar
-            size="40"
-            variant="light-primary"
-            badge
-            :src="require('@/assets/images/avatars/13-small.png')"
-            class="badge-minimal"
-            badge-variant="success"
-          />
-        </template>
-
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="UserIcon"
-            class="mr-50"
-          />
-          <span>Profile</span>
-        </b-dropdown-item>
-
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="MailIcon"
-            class="mr-50"
-          />
-          <span>Inbox</span>
-        </b-dropdown-item>
-
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="CheckSquareIcon"
-            class="mr-50"
-          />
-          <span>Task</span>
-        </b-dropdown-item>
-
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="MessageSquareIcon"
-            class="mr-50"
-          />
-          <span>Chat</span>
-        </b-dropdown-item>
-
-        <b-dropdown-divider />
-
-        <b-dropdown-item link-class="d-flex align-items-center">
-          <feather-icon
-            size="16"
-            icon="LogOutIcon"
-            class="mr-50"
-          />
-          <span>Logout</span>
-        </b-dropdown-item>
-      </b-nav-item-dropdown>
-    </b-navbar-nav>
+    <header>
+      <div class="hero-section d-flex align-items-center flex-column mt-2 mb-3">
+        <h1 class="mb-5">
+          YouEvent
+        </h1>
+        <p class="w-50 text-center">
+          lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+      </div>
+      <Carousel />
+    </header>
   </div>
 </template>
 
 <script>
 import {
-  BLink, BNavbarNav, BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar,
+  BLink, BNavbarNav, BNavItemDropdown, BDropdownItem, BDropdownDivider, BAvatar, BNavbarBrand, BNavbarToggle, BNavbar, BNavbarNavText,
+    BCard, BCardText, BCardTitle, BCardBody, BCardHeader, BCardFooter, BCarousel, BCarouselSlide, BCarouselIndicators, BCarouselIndicator,
 } from 'bootstrap-vue'
 import DarkToggler from '@core/layouts/components/app-navbar/components/DarkToggler.vue'
 
@@ -109,8 +113,20 @@ export default {
     BDropdownItem,
     BDropdownDivider,
     BAvatar,
-
-    // Navbar Components
+    BNavbarBrand,
+    BNavbarToggle,
+    BNavbar,
+    BNavbarNavText,
+    BCard,
+    BCardText,
+    BCardTitle,
+    BCardBody,
+    BCardHeader,
+    BCardFooter,
+    BCarousel,
+    BCarouselSlide,
+    BCarouselIndicators,
+    BCarouselIndicator,
     DarkToggler,
   },
   props: {

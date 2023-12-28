@@ -116,7 +116,7 @@
 
 <script>
 
-import { BCard, BCardText, BLink, BForm, BFormGroup, BFormInput, BButton } from 'bootstrap-vue'
+import { BCard, BCardText, BLink, BForm, BFormGroup, BFormInput, BButton, BFormFile } from 'bootstrap-vue'
 import { createEvent } from '@/services/eventService'
 
 export default {
@@ -124,12 +124,13 @@ export default {
   components: {
     BCard,
     BCardText,
+    BFormFile,
     // eslint-disable-next-line vue/no-unused-components
     BLink,
     BForm,
     BFormGroup,
     BFormInput,
-    BButton
+    BButton,
   },
   data() {
     return {

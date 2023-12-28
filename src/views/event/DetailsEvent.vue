@@ -291,7 +291,7 @@ export default {
           })
         })
         .then(() => {
-          this.$router.push({ name: 'event-detail', params: { id: this.event.id } })
+          this.$router.push({ name: 'dashboard' })
         })
         .catch(error => {
           console.log(error)

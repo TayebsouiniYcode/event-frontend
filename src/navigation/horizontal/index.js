@@ -4,13 +4,8 @@ export default [
     icon: 'FileIcon',
     children: [
       {
-        title: 'Home',
-        route: 'home',
-        icon: 'HomeIcon',
-      },
-      {
-        title: 'Second Page',
-        route: 'second-page',
+        title: 'Dashboard',
+        route: 'dashboard',
         icon: 'FileIcon',
       },
     ],
