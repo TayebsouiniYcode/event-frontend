@@ -1,6 +1,15 @@
 <template>
   <div>
     <Navbar />
+    <section class="banner">
+      <div class="">
+        <div class="row">
+          <div class="col-md-12">
+            <Carousel />
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="d-flex align-items-center flex-column justify-content-center"  style="height: 400px">
       <h1 style="font-size: 80px">
         {{ event.name }}
@@ -38,10 +47,12 @@
 <script>
 import { getEvent } from '@/services/eventService'
 import Navbar from '../../layouts/components/Navbar.vue'
+import Carousel from '../../layouts/components/Carousel.vue'
 
 export default {
   name: 'DetailsEventClient',
   components: {
+    Carousel,
     Navbar,
   },
   data() {

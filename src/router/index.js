@@ -71,6 +71,13 @@ const router = new VueRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem('accessToken')) {
+          next({ name: 'dashboard' })
+        } else {
+          next({ name: 'login' })
+        }
+      },
       component: () => import('@/views/Dashboard.vue'),
       meta: {
         pageTitle: 'Dashboard',

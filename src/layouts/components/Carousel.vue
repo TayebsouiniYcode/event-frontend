@@ -8,11 +8,10 @@
 
     >
       <b-carousel-slide
-          caption="First Slide"
           img-src="@/assets/images/slider/s1.jpg"
       >
-          <h3>Titre Diapositive 1</h3>
-          <p>Description de la première diapositive.</p>
+          <h3 class="text-light" style="font-size: 80px">YouEvent</h3>
+          <p></p>
       </b-carousel-slide>
       <b-carousel-slide
           caption="Second Slide"
