@@ -55,6 +55,8 @@
 import Navbar from '../../layouts/components/Navbar.vue'
 import router from '@/router'
 
+import { makeReservation} from '@/services/ReservationService'
+
 export default {
   name: 'Checkout',
   components: {
@@ -80,7 +82,21 @@ export default {
       })
     },
     checkout() {
-      // You will be redirected to Stripe's secure checkout page
+      this.panier[0].forEach(ticket => {
+        const reservation = {
+          ticket_id: ticket.id,
+          quantity: 3,
+        }
+        makeReservation(reservation)
+          .then(() => {
+            console.log('reservation ok');
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      })
+      localStorage.removeItem('panier')
+      router.push('/dashboard')
     },
   },
 

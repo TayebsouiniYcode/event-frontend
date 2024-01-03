@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="">
   <div>
       <Navbar />
       <hr class="w-10 mb-5 mt-5">
     <h1 class="" style="font-size: 40px">Panier</h1>
     <hr class="w-100">
-      <div class="row">
+      <div class="row p-5">
         <div class="col-12 col-md-8">
           <div class="w-100" v-for="ticket in panier[0]" :key="ticket.id">
             <div class="card">
@@ -14,7 +14,12 @@
                 <p class="card-text">{{ ticket.description }}</p>
                 <p class="card-text">{{ ticket.price }} €</p>
                 <p class="card-text">{{ ticket.quantity }} tickets <span class="text-success">Disponibles</span></p>
-                <button class="btn w-100 bg-danger text-white" @click="deleteTicket(ticket)">Delete</button>
+                <div class="d-flex justify-content-end">
+                  <span>
+
+                  </span>
+                  <button class="btn btn-primary" @click="deleteTicket(ticket)">Delete</button>
+                </div>
               </div>
             </div>
           </div>
@@ -55,6 +60,8 @@
 <script>
 
 import Navbar from '../../layouts/components/Navbar.vue'
+import { makeReservation } from '@/services/ReservationService'
+import router from '@/router'
 
 export default {
   name: 'Panier',
@@ -91,7 +98,22 @@ export default {
       this.totalTTC = this.totalTTC.toFixed(2)
     },
     checkout() {
-      this.$router.push('/checkout')
+      console.log(this.panier[0])
+      this.panier[0].forEach(ticket => {
+        const reservation = {
+          ticket_id: ticket.id,
+          quantity: 3,
+        }
+        makeReservation(reservation)
+          .then(() => {
+            console.log('reservation ok')
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      })
+      localStorage.removeItem('tickets')
+      router.push({ name: 'Dashboard' })
     },
   },
 }
