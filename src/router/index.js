@@ -71,13 +71,6 @@ const router = new VueRouter({
     {
       path: '/dashboard',
       name: 'dashboard',
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem('accessToken')) {
-          next({ name: 'dashboard' })
-        } else {
-          next({ name: 'login' })
-        }
-      },
       component: () => import('@/views/Dashboard.vue'),
       meta: {
         pageTitle: 'Dashboard',
@@ -150,6 +143,13 @@ router.afterEach(() => {
   if (appLoading) {
     appLoading.style.display = 'none'
   }
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = !!localStorage.getItem('accessToken')
+
+  if (to.name !== 'login' && !isAuthenticated) next({ name: 'login' })
+  else next()
 })
 
 export default router

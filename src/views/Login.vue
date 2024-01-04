@@ -257,7 +257,6 @@ export default {
       })
     },
     signin() {
-      console.log('this is login in component')
       login(
         this.userEmail,
         this.password,
