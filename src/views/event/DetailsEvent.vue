@@ -172,6 +172,23 @@
         </table>
       </section>
     </div>
+    <div class="textes-section mt-5">
+      <div class="d-flex justify-content-end">
+        <button class="btn bg-dark text-light" @click="$bvModal.show('bv-modal-addText')">Add Texte</button>
+      </div>
+      <b-card v-for="texte in event.textes" :key="texte.id" >
+        <b-card-title>
+          {{ texte.title }}
+        </b-card-title>
+        <br>
+        <b-card-sub-title class="text-muted">
+          {{ texte.subtitle }}
+        </b-card-sub-title>
+        <b-card-text>
+          {{ texte.texte }}
+        </b-card-text>
+      </b-card>
+    </div>
     <b-modal id="bv-modal-addTicket" title="Add Ticket" hide-footer>
       <b-form @submit.prevent="addTicket">
         <b-form-group id="input-group-1" label="Name:" label-for="name">
@@ -209,6 +226,35 @@
         <b-button type="submit" variant="primary">Create</b-button>
       </b-form>
     </b-modal>
+    <b-modal id="bv-modal-addText" title="Ajouter un texte" hide-footer>
+      <b-form @submit.prevent="addText">
+        <b-form-group id="textTitle" label="Titme:" label-for="title">
+          <b-form-input
+              id="title"
+              v-model="text.title"
+              required
+              placeholder="Entrez le titre du texte"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group id="textSubTitle" label="subtitle:" label-for="subtitle">
+          <b-form-input
+              id="subtitle"
+              v-model="text.subtitle"
+              required
+              placeholder="Entrez le sous-titre du texte"
+          ></b-form-input>
+        </b-form-group>
+        <b-form-group id="textDetails" label="text:" label-for="text">
+          <b-form-input
+              id="text"
+              v-model="text.texte"
+              required
+              placeholder="Entrez le texte"
+          ></b-form-input>
+        </b-form-group>
+        <b-button type="submit" variant="primary">Ajouter</b-button>
+      </b-form>
+    </b-modal>
   </div>
 </template>
 
@@ -216,7 +262,7 @@
 import { getEvent, updateEvent } from '@/services/eventService'
 import { ajouterTicket } from '@/services/ticketService'
 import { BCard, BCardText, BLink, BForm, BFormGroup, BFormInput, BButton} from 'bootstrap-vue'
-
+import { ajouterTexte } from '@/services/TextService'
 export default {
   name: 'DetailsEvent',
   components: {
@@ -237,6 +283,12 @@ export default {
         price: '',
         quantity: '',
         event_id: '',
+      },
+      text: {
+        title: '',
+        subtitle: '',
+        texte: '',
+        event_id: 0,
       },
     }
   },
@@ -285,6 +337,37 @@ export default {
         })
         .then(() => {
           this.$bvToast.toast('Ticket added successfully', {
+            title: 'Success',
+            variant: 'success',
+            solid: true,
+          })
+        })
+        .then(() => {
+          this.$router.push({ name: 'dashboard' })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    addText() {
+      this.text.event_id = this.event.id
+      ajouterTexte(this.text)
+        .then(response => {
+          if (response.data.text != null) {
+            this.event.texts.push(response.data.text)
+          }
+          this.text = {
+            title: '',
+            subtitle: '',
+            texte: '',
+            event_id: this.event.id,
+          }
+        })
+        .then(() => {
+          this.$bvModal.hide('bv-modal-addText')
+        })
+        .then(() => {
+          this.$bvToast.toast('Text added successfully', {
             title: 'Success',
             variant: 'success',
             solid: true,

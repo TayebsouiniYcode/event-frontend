@@ -195,6 +195,8 @@ import { togglePasswordVisibility } from '@core/mixins/ui/forms'
 import store from '@/store/index'
 import ToastificationContent from '@core/components/toastification/ToastificationContent.vue'
 import { login } from '@/services/AuthService'
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode'
 
 export default {
   components: {
@@ -265,6 +267,10 @@ export default {
           localStorage.setItem('accessToken', res.access_token)
           localStorage.setItem('expires', res.expires_in)
           localStorage.setItem('type', res.bearer)
+          localStorage.setItem('firstname', res.firstname)
+          localStorage.setItem('lastname', res.lastname)
+          localStorage.setItem('email', res.email)
+          localStorage.setItem('role', res.role)
           this.$router.push({ name: 'dashboard' })
         })
         .catch(err => {
