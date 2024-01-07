@@ -132,6 +132,20 @@ const router = new VueRouter({
       path: '*',
       redirect: 'error-404',
     },
+    {
+      path: '/reservation',
+      name: 'reservation',
+      component: () => import('@/views/reservation/Reservation.vue'),
+      meta: {
+        pageTitle: 'Reservation',
+        breadcrumb: [
+          {
+            text: 'Reservation',
+            active: true,
+          },
+        ],
+      },
+    },
   ],
 })
 

@@ -271,6 +271,7 @@ export default {
           localStorage.setItem('lastname', res.lastname)
           localStorage.setItem('email', res.email)
           localStorage.setItem('role', res.role)
+          localStorage.setItem('user_id', res.user_id)
           this.$router.push({ name: 'dashboard' })
         })
         .catch(err => {

@@ -14,6 +14,8 @@
                 <p class="card-text">{{ ticket.description }}</p>
                 <p class="card-text">{{ ticket.price }} €</p>
                 <p class="card-text">{{ ticket.quantity }} tickets <span class="text-success">Disponibles</span></p>
+                <label class="form-label">Quantity : </label><input type="number" class="quantity form-control" v-model="quantity">
+                <hr class="w-100">
                 <div class="d-flex justify-content-end">
                   <span>
 
@@ -72,6 +74,7 @@ export default {
     return {
       panier: [],
       totalTTC: 0,
+      quantity: 1,
     }
   },
   created() {
@@ -98,11 +101,11 @@ export default {
       this.totalTTC = this.totalTTC.toFixed(2)
     },
     checkout() {
-      console.log(this.panier[0])
       this.panier[0].forEach(ticket => {
         const reservation = {
           ticket_id: ticket.id,
-          quantity: 3,
+          quantity: this.quantity,
+          user_id: localStorage.getItem('user_id'),
         }
         makeReservation(reservation)
           .then(() => {

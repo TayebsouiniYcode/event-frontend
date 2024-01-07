@@ -8,6 +8,11 @@ export default [
         route: 'dashboard',
         icon: 'FileIcon',
       },
+      {
+        title: 'Reservation',
+        route: 'reservation',
+        icon: 'FileIcon',
+      },
     ],
   },
 ]
