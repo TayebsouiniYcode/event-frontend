@@ -137,7 +137,7 @@
 
           <b-card-text class="text-center mt-2">
             <span>New on our platform? </span>
-            <b-link :to="{name:'page-auth-register-v2'}">
+            <b-link :to="{name:'register'}">
               <span>&nbsp;Create an account</span>
             </b-link>
           </b-card-text>

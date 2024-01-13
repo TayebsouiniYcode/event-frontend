@@ -25,8 +25,24 @@
         {{ countdown() }}
       </p>
     </section>
+    <section class="container affichage des texte">
+      <b-card v-for="texte in event.textes" :key="texte.id">
+        <b-card-title class="font-large-2">{{ texte.title }}</b-card-title>
+        <hr class="w-100">
+        <b-card-sub-title>
+          {{ texte.subtitle }}
+        </b-card-sub-title>
+        <b-card-body>
+          <b-card-text>
+            {{ texte.texte }}
+          </b-card-text>
+        </b-card-body>
+      </b-card>
+    </section>
     <section class="tickets">
       <div class="container">
+        <h2 class="font-large-1 text-center">Billets</h2>
+        <hr class="w-100">
         <div class="row">
           <div class="col-md-4" v-for="ticket in event.tickets" :key="ticket.id">
             <div class="card mb-4">
@@ -48,12 +64,18 @@
 import { getEvent } from '@/services/eventService'
 import Navbar from '../../layouts/components/Navbar.vue'
 import Carousel from '../../layouts/components/Carousel.vue'
+import { BCard, BCardBody, BCardText, BCardTitle, BCardSubTitle } from 'bootstrap-vue'
 
 export default {
   name: 'DetailsEventClient',
   components: {
     Carousel,
     Navbar,
+    BCard,
+    BCardBody,
+    BCardText,
+    BCardTitle,
+    BCardSubTitle,
   },
   data() {
     return {

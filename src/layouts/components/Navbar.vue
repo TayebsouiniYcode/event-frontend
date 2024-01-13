@@ -60,7 +60,7 @@
             icon="UserIcon"
             class="mr-50"
           />
-          <router-link to="dashboard">
+          <router-link to="/dashboard">
             <span>Dashboard</span>
           </router-link>
         </b-dropdown-item>

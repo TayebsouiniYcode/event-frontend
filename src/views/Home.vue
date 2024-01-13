@@ -11,7 +11,7 @@
         <b-col v-for="event in events" :key="event.id" col="12" md="3">
           <b-card tag="article" no-body>
             <b-link :to="{ name: 'pages-blog-detail', params: { id: event.id } }">
-              <b-img src="https://images.pexels.com/photos/1714361/pexels-photo-1714361.jpeg" alt="" class="card-img-top"/>
+              <b-img src="../assets/images/events/image.jpg" alt="" class="card-img-top"/>
             </b-link>
             <b-card-body>
               <b-card-title>

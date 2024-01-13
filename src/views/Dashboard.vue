@@ -37,7 +37,7 @@
 
 <script>
 import { BCard, BCardText, BLink } from 'bootstrap-vue'
-import { getEvents, deleteEvent } from '@/services/eventService'
+import { deleteEvent, getEventsByUser } from '@/services/eventService'
 
 export default {
   components: {
@@ -56,8 +56,7 @@ export default {
   methods: {
     getEvents() {
       // eslint-disable-next-line import/no-named-as-default-member
-      getEvents().then(response => {
-        console.log(response.data.events)
+      getEventsByUser(localStorage.getItem('user_id')).then(response => {
         this.events = response.data.events
       })
     },

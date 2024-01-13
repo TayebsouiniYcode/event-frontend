@@ -51,7 +51,8 @@
           </div>
         </div>
         <div>
-          <button class="btn bg-dark text-light w-100" @click="$bvModal.show('bv-modal-editEvent')">Modifier</button>
+          <button class="btn bg-dark text-light w-100 mb-2" @click="$bvModal.show('bv-modal-editEvent')">Modifier</button>
+          <button class="btn bg-dark text-light w-100" @click="$bvModal.show('bv-modal-addText')">Add Texte</button>
         </div>
         <b-modal id="bv-modal-editEvent" title="Edit Event" hide-footer>
           <b-form @submit.prevent="editEvent">
@@ -173,11 +174,8 @@
       </section>
     </div>
     <div class="textes-section mt-5">
-      <div class="d-flex justify-content-end">
-        <button class="btn bg-dark text-light" @click="$bvModal.show('bv-modal-addText')">Add Texte</button>
-      </div>
       <b-card v-for="texte in event.textes" :key="texte.id" >
-        <b-card-title>
+        <b-card-title class="font-large-2">
           {{ texte.title }}
         </b-card-title>
         <br>
@@ -247,7 +245,7 @@
         <b-form-group id="textDetails" label="text:" label-for="text">
           <b-form-input
               id="text"
-              v-model="text.texte"
+              v-model="text.text"
               required
               placeholder="Entrez le texte"
           ></b-form-input>
@@ -261,8 +259,10 @@
 <script>
 import { getEvent, updateEvent } from '@/services/eventService'
 import { ajouterTicket } from '@/services/ticketService'
-import { BCard, BCardText, BLink, BForm, BFormGroup, BFormInput, BButton} from 'bootstrap-vue'
+import { BCard, BCardText, BLink, BForm, BFormGroup, BFormInput, BButton, BModal} from 'bootstrap-vue'
 import { ajouterTexte } from '@/services/TextService'
+import router from '@/router'
+
 export default {
   name: 'DetailsEvent',
   components: {
@@ -273,6 +273,7 @@ export default {
     BFormGroup,
     BFormInput,
     BButton,
+    BModal,
   },
   data() {
     return {
@@ -287,7 +288,7 @@ export default {
       text: {
         title: '',
         subtitle: '',
-        texte: '',
+        text: '',
         event_id: 0,
       },
     }
@@ -343,7 +344,7 @@ export default {
           })
         })
         .then(() => {
-          this.$router.push({ name: 'dashboard' })
+          router.push({ name: 'DetailsEvent', params: { id: this.event.id } })
         })
         .catch(error => {
           console.log(error)
@@ -356,12 +357,14 @@ export default {
           if (response.data.text != null) {
             this.event.texts.push(response.data.text)
           }
+          this.$bvModal.hide('bv-modal-addText')
           this.text = {
             title: '',
             subtitle: '',
-            texte: '',
+            text: '',
             event_id: this.event.id,
           }
+
         })
         .then(() => {
           this.$bvModal.hide('bv-modal-addText')
@@ -374,7 +377,7 @@ export default {
           })
         })
         .then(() => {
-          this.$router.push({ name: 'dashboard' })
+          router.push({ name: 'DetailsEvent', params: { id: this.event.id } })
         })
         .catch(error => {
           console.log(error)
@@ -390,7 +393,7 @@ export default {
 
 <style>
 .helo-section-event__details {
-  background-image: url("https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg");
+  background-image: url("../../assets/images/cardEventStatique.jpeg");
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;

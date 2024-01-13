@@ -124,7 +124,6 @@ export default {
   components: {
     BCard,
     BCardText,
-    BFormFile,
     // eslint-disable-next-line vue/no-unused-components
     BLink,
     BForm,
@@ -141,6 +140,7 @@ export default {
         end_date: '',
         start_time: '',
         end_time: '',
+        proprietor_id: localStorage.getItem('user_id'),
         address: {
           address: '',
           city: '',

@@ -89,14 +89,14 @@ export default {
         }
         makeReservation(reservation)
           .then(() => {
-            console.log('reservation ok');
+            console.log('reservation ok')
           })
           .catch(error => {
             console.error(error)
           })
       })
       localStorage.removeItem('panier')
-      router.push('/dashboard')
+      router.push({ path: '/reservation' })
     },
   },
 
